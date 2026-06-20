@@ -8,8 +8,8 @@
 [discord]: https://helpch.at/discord
 [spigot]: https://www.spigotmc.org/resources/6245/
 [hangar]: https://hangar.papermc.io/HelpChat/PlaceholderAPI
-[bbb]: https://builtbybit.com/resources/placeholderapi.24306
-[Expansions cloud]: https://api.extendedclip.com/home
+[modrinth]: https://modrinth.com/plugin/placeholderapi
+[Expansions cloud]: https://ecloud.placeholderapi.com
 [placeholder list]: https://helpch.at/placeholders
 [statistics]: https://bstats.org/plugin/bukkit/PlaceholderAPI
 
@@ -32,7 +32,7 @@
 
 Support for specific plugins are provided either by the plugin itself or through expansions. The expansions may be downloaded in-game through the PAPI Expansion Cloud. There are currently over 240+ expansions that support a wide variety of plugins, such as Essentials, Factions, LuckPerms, and Vault. 
 
-PlaceholderAPI has been downloaded over 1,700,000 times on Spigot and has been used concurrently on over 45,000 servers, which makes it a must-have for a server of any type or scale.
+PlaceholderAPI has been downloaded over 2,000,000 times on Spigot and has been used concurrently on over 50,000 servers, which makes it a must-have for a server of any type or scale.
 
 ## Contribute
 If you would like to contribute towards PlaceholderAPI should you take a look at our [Contributing file][contributing] for the ins and outs on how you can do that and what you need to keep in mind.
@@ -50,5 +50,5 @@ If you would like to create your own Placeholder Expansion for PlaceholderAPI, t
 - [Placeholder List]
 - [Spigot Page][spigot]
 - [Hangar Page][hangar]
-- [BuiltByBit Page][bbb]
+- [Modrinth Page][modrinth]
 - [Plugin Statistics][statistics]

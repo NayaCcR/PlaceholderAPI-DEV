@@ -2,7 +2,7 @@
  * This file is part of PlaceholderAPI
  *
  * PlaceholderAPI
- * Copyright (c) 2015 - 2024 PlaceholderAPI Team
+ * Copyright (c) 2015 - 2026 PlaceholderAPI Team
  *
  * PlaceholderAPI free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ import org.bukkit.entity.Player;
 /**
  * Classes implementing this interface will have a {@link #cleanup(Player) cleanup void} that is
  * called by PlaceholderAPI whenever a Player leaves the server.
- * 
+ *
  * <p>This can be useful for cases where you keep data of the player in a cache or similar
  * and want to free up space whenever they leave.
  *
@@ -33,10 +33,10 @@ import org.bukkit.entity.Player;
  */
 public interface Cleanable {
 
-  /**
-   * Called when a player leaves the server
-   *
-   * @param p (@link Player} who left the server
-   */
-  void cleanup(Player p);
+    /**
+     * Called when a player leaves the server
+     *
+     * @param p (@link Player} who left the server
+     */
+    void cleanup(Player p);
 }

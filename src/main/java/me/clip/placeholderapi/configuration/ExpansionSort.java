@@ -2,7 +2,7 @@
  * This file is part of PlaceholderAPI
  *
  * PlaceholderAPI
- * Copyright (c) 2015 - 2024 PlaceholderAPI Team
+ * Copyright (c) 2015 - 2026 PlaceholderAPI Team
  *
  * PlaceholderAPI free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,27 +21,28 @@
 package me.clip.placeholderapi.configuration;
 
 import java.util.Comparator;
+
 import me.clip.placeholderapi.expansion.cloud.CloudExpansion;
 import org.jetbrains.annotations.NotNull;
 
 public enum ExpansionSort implements Comparator<CloudExpansion> {
 
-  NAME(Comparator.comparing(CloudExpansion::getName)),
-  AUTHOR(Comparator.comparing(CloudExpansion::getAuthor)),
-  LATEST(Comparator.comparing(CloudExpansion::getLastUpdate).reversed());
+    NAME(Comparator.comparing(CloudExpansion::getName)),
+    AUTHOR(Comparator.comparing(CloudExpansion::getAuthor)),
+    LATEST(Comparator.comparing(CloudExpansion::getLastUpdate).reversed());
 
 
-  @NotNull
-  private final Comparator<CloudExpansion> comparator;
+    @NotNull
+    private final Comparator<CloudExpansion> comparator;
 
-  ExpansionSort(@NotNull final Comparator<CloudExpansion> comparator) {
-    this.comparator = comparator;
-  }
+    ExpansionSort(@NotNull final Comparator<CloudExpansion> comparator) {
+        this.comparator = comparator;
+    }
 
 
-  @Override
-  public final int compare(final CloudExpansion expansion1, final CloudExpansion expansion2) {
-    return comparator.compare(expansion1, expansion2);
-  }
+    @Override
+    public final int compare(final CloudExpansion expansion1, final CloudExpansion expansion2) {
+        return comparator.compare(expansion1, expansion2);
+    }
 
 }

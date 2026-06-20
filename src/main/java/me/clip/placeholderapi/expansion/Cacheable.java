@@ -2,7 +2,7 @@
  * This file is part of PlaceholderAPI
  *
  * PlaceholderAPI
- * Copyright (c) 2015 - 2024 PlaceholderAPI Team
+ * Copyright (c) 2015 - 2026 PlaceholderAPI Team
  *
  * PlaceholderAPI free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,15 +24,15 @@ package me.clip.placeholderapi.expansion;
  * Classes implementing this interface will have a {@link #clear() clear void} that is called
  * by PlaceholderAPI whenever the {@link me.clip.placeholderapi.expansion.PlaceholderExpansion PlaceholderExpansion}
  * is unregistered.
- * 
+ *
  * <p>This allows you to execute things such as clearing internal caches, saving data to files, etc.
  *
  * @author Ryan McCarthy
  */
 public interface Cacheable {
 
-  /**
-   * Called when the implementing class is unregistered from PlaceholderAPI
-   */
-  void clear();
+    /**
+     * Called when the implementing class is unregistered from PlaceholderAPI
+     */
+    void clear();
 }

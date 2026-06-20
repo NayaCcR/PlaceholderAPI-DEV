@@ -2,7 +2,7 @@
  * This file is part of PlaceholderAPI
  *
  * PlaceholderAPI
- * Copyright (c) 2015 - 2024 PlaceholderAPI Team
+ * Copyright (c) 2015 - 2026 PlaceholderAPI Team
  *
  * PlaceholderAPI free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,17 +26,17 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class PlaceholderHook {
-  @Nullable
-  public String onRequest(final OfflinePlayer player, @NotNull final String params) {
-    if (player != null && player.isOnline()) {
-      return onPlaceholderRequest(player.getPlayer(), params);
+    @Nullable
+    public String onRequest(final OfflinePlayer player, @NotNull final String params) {
+        if (player != null && player.isOnline()) {
+            return onPlaceholderRequest(player.getPlayer(), params);
+        }
+
+        return onPlaceholderRequest(null, params);
     }
 
-    return onPlaceholderRequest(null, params);
-  }
-
-  @Nullable
-  public String onPlaceholderRequest(final Player player, @NotNull final String params) {
-    return null;
-  }
+    @Nullable
+    public String onPlaceholderRequest(final Player player, @NotNull final String params) {
+        return null;
+    }
 }

@@ -2,7 +2,7 @@
  * This file is part of PlaceholderAPI
  *
  * PlaceholderAPI
- * Copyright (c) 2015 - 2024 PlaceholderAPI Team
+ * Copyright (c) 2015 - 2026 PlaceholderAPI Team
  *
  * PlaceholderAPI free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,19 +25,19 @@ import org.bukkit.entity.Player;
 /**
  * Implementing this interface allows your {@link me.clip.placeholderapi.expansion.PlaceholderExpansion PlaceholderExpansion}
  * to be used as a relational placeholder expansion.
- * 
+ *
  * <p>Relational placeholders take two Players as input and are always prefixed with {@code rel_},
  * so {@code %foo_bar%} becomes {@code %rel_foo_bar%}
  */
 public interface Relational {
 
-  /**
-   * This method is called whenever a placeholder starting with {@code rel_} is called.
-   * 
-   * @param one The first player used for the placeholder.
-   * @param two The second player used for the placeholder.
-   * @param identifier The text right after the expansion's name (%expansion_<b>identifier</b>%)
-   * @return Parsed String from the expansion.
-   */
-  String onPlaceholderRequest(Player one, Player two, String identifier);
+    /**
+     * This method is called whenever a placeholder starting with {@code rel_} is called.
+     *
+     * @param one        The first player used for the placeholder.
+     * @param two        The second player used for the placeholder.
+     * @param identifier The text right after the expansion's name (%expansion_<b>identifier</b>%)
+     * @return Parsed String from the expansion.
+     */
+    String onPlaceholderRequest(Player one, Player two, String identifier);
 }

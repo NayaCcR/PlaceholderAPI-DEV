@@ -2,7 +2,7 @@
  * This file is part of PlaceholderAPI
  *
  * PlaceholderAPI
- * Copyright (c) 2015 - 2024 PlaceholderAPI Team
+ * Copyright (c) 2015 - 2026 PlaceholderAPI Team
  *
  * PlaceholderAPI free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@
 package me.clip.placeholderapi.commands.impl.cloud;
 
 import java.util.List;
+
 import me.clip.placeholderapi.PlaceholderAPIPlugin;
 import me.clip.placeholderapi.commands.PlaceholderCommand;
 import me.clip.placeholderapi.util.Msg;
@@ -30,18 +31,18 @@ import org.jetbrains.annotations.Unmodifiable;
 
 public final class CommandECloudRefresh extends PlaceholderCommand {
 
-  public CommandECloudRefresh() {
-    super("refresh");
-  }
+    public CommandECloudRefresh() {
+        super("refresh");
+    }
 
-  @Override
-  public void evaluate(@NotNull final PlaceholderAPIPlugin plugin,
-      @NotNull final CommandSender sender, @NotNull final String alias,
-      @NotNull @Unmodifiable final List<String> params) {
-    plugin.getCloudExpansionManager().load();
+    @Override
+    public void evaluate(@NotNull final PlaceholderAPIPlugin plugin,
+                         @NotNull final CommandSender sender, @NotNull final String alias,
+                         @NotNull @Unmodifiable final List<String> params) {
+        plugin.getCloudExpansionManager().load();
 
-    Msg.msg(sender,
-        "&aThe eCloud manager has been refreshed!");
-  }
+        Msg.msg(sender,
+                "&aThe eCloud manager has been refreshed!");
+    }
 
 }

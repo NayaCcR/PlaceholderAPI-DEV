@@ -27,7 +27,9 @@ import me.clip.placeholderapi.scheduler.scheduling.schedulers.TaskScheduler;
 import me.clip.placeholderapi.scheduler.scheduling.tasks.MyScheduledTask;
 import org.bukkit.plugin.Plugin;
 
-/** Just modified BukkitRunnable */
+/**
+ * Just modified BukkitRunnable
+ */
 public abstract class UniversalRunnable implements Runnable {
     MyScheduledTask task;
 

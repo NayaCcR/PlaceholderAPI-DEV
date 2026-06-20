@@ -2,7 +2,7 @@
  * This file is part of PlaceholderAPI
  *
  * PlaceholderAPI
- * Copyright (c) 2015 - 2024 PlaceholderAPI Team
+ * Copyright (c) 2015 - 2026 PlaceholderAPI Team
  *
  * PlaceholderAPI free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,40 +31,40 @@ import org.jetbrains.annotations.NotNull;
 @Deprecated
 public final class PlaceholderHookUnloadEvent extends Event {
 
-  @NotNull
-  private static final HandlerList HANDLERS = new HandlerList();
+    @NotNull
+    private static final HandlerList HANDLERS = new HandlerList();
 
 
-  @NotNull
-  private final String plugin;
-  @NotNull
-  private final PlaceholderHook placeholderHook;
+    @NotNull
+    private final String plugin;
+    @NotNull
+    private final PlaceholderHook placeholderHook;
 
-  public PlaceholderHookUnloadEvent(@NotNull final String plugin,
-      @NotNull final PlaceholderHook placeholderHook) {
-    this.plugin = plugin;
-    this.placeholderHook = placeholderHook;
-  }
+    public PlaceholderHookUnloadEvent(@NotNull final String plugin,
+                                      @NotNull final PlaceholderHook placeholderHook) {
+        this.plugin = plugin;
+        this.placeholderHook = placeholderHook;
+    }
 
-  @NotNull
-  public static HandlerList getHandlerList() {
-    return HANDLERS;
-  }
+    @NotNull
+    public static HandlerList getHandlerList() {
+        return HANDLERS;
+    }
 
-  @NotNull
-  public String getHookName() {
-    return plugin;
-  }
+    @NotNull
+    public String getHookName() {
+        return plugin;
+    }
 
-  @NotNull
-  public PlaceholderHook getHook() {
-    return placeholderHook;
-  }
+    @NotNull
+    public PlaceholderHook getHook() {
+        return placeholderHook;
+    }
 
-  @NotNull
-  @Override
-  public HandlerList getHandlers() {
-    return HANDLERS;
-  }
+    @NotNull
+    @Override
+    public HandlerList getHandlers() {
+        return HANDLERS;
+    }
 
 }

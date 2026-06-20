@@ -2,7 +2,7 @@
  * This file is part of PlaceholderAPI
  *
  * PlaceholderAPI
- * Copyright (c) 2015 - 2024 PlaceholderAPI Team
+ * Copyright (c) 2015 - 2026 PlaceholderAPI Team
  *
  * PlaceholderAPI free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,19 +30,19 @@ import org.jetbrains.annotations.NotNull;
 
 public final class ServerLoadEventListener implements Listener {
 
-  @NotNull
-  private final PlaceholderAPIPlugin plugin;
+    @NotNull
+    private final PlaceholderAPIPlugin plugin;
 
-  public ServerLoadEventListener(@NotNull final PlaceholderAPIPlugin plugin) {
-    this.plugin = plugin;
+    public ServerLoadEventListener(@NotNull final PlaceholderAPIPlugin plugin) {
+        this.plugin = plugin;
 
-    Bukkit.getPluginManager().registerEvents(this, plugin);
-  }
+        Bukkit.getPluginManager().registerEvents(this, plugin);
+    }
 
-  @EventHandler
-  public void onServerLoad(@NotNull final ServerLoadEvent event) {
-    HandlerList.unregisterAll(this);
-    plugin.getLocalExpansionManager().load(Bukkit.getConsoleSender());
-  }
+    @EventHandler
+    public void onServerLoad(@NotNull final ServerLoadEvent event) {
+        HandlerList.unregisterAll(this);
+        plugin.getLocalExpansionManager().load(Bukkit.getConsoleSender());
+    }
 
 }

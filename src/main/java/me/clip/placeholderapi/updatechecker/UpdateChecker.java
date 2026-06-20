@@ -2,7 +2,7 @@
  * This file is part of PlaceholderAPI
  *
  * PlaceholderAPI
- * Copyright (c) 2015 - 2024 PlaceholderAPI Team
+ * Copyright (c) 2015 - 2026 PlaceholderAPI Team
  *
  * PlaceholderAPI free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,6 +25,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Arrays;
 import javax.net.ssl.HttpsURLConnection;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import me.clip.placeholderapi.PlaceholderAPIPlugin;
 import me.clip.placeholderapi.scheduler.scheduling.schedulers.TaskScheduler;
 import me.clip.placeholderapi.util.Msg;
@@ -35,93 +38,93 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class UpdateChecker implements Listener {
+    private static final String MODRINTH_URL = "https://api.modrinth.com/v2/project/lKEzGugV/version";
 
-  private static final int RESOURCE_ID = 6245;
-  private final PlaceholderAPIPlugin plugin;
-  private final TaskScheduler scheduler;
-  private final String pluginVersion;
-  private String spigotVersion;
-  private boolean updateAvailable;
+    private static final int RESOURCE_ID = 6245;
+    private final PlaceholderAPIPlugin plugin;
+    private final TaskScheduler scheduler;
+    private final String pluginVersion;
+    private String modrinthVersion;
+    private boolean updateAvailable;
 
-  public UpdateChecker(PlaceholderAPIPlugin plugin) {
-    this.plugin = plugin;
-    scheduler = plugin.getScheduler();
-    pluginVersion = plugin.getDescription().getVersion();
-  }
-
-  public boolean hasUpdateAvailable() {
-    return updateAvailable;
-  }
-
-  public String getSpigotVersion() {
-    return spigotVersion;
-  }
-
-  public void fetch() {
-    scheduler.runTaskAsynchronously(() -> {
-      try {
-        HttpsURLConnection con = (HttpsURLConnection) new URL(
-            "https://api.spigotmc.org/legacy/update.php?resource=" + RESOURCE_ID).openConnection();
-        con.setRequestMethod("GET");
-        spigotVersion = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
-      } catch (Exception ex) {
-        plugin.getLogger().info("Failed to check for updates on spigot.");
-        return;
-      }
-
-      if (spigotVersion == null || spigotVersion.isEmpty()) {
-        return;
-      }
-
-      updateAvailable = spigotIsNewer();
-
-      if (!updateAvailable) {
-        return;
-      }
-
-      scheduler.runTask(() -> {
-        plugin.getLogger()
-            .info("An update for PlaceholderAPI (v" + getSpigotVersion() + ") is available at:");
-        plugin.getLogger()
-            .info("https://www.spigotmc.org/resources/placeholderapi." + RESOURCE_ID + "/");
-        Bukkit.getPluginManager().registerEvents(this, plugin);
-      });
-    });
-  }
-
-  private boolean spigotIsNewer() {
-    if (spigotVersion == null || spigotVersion.isEmpty()) {
-      return false;
+    public UpdateChecker(PlaceholderAPIPlugin plugin) {
+        this.plugin = plugin;
+        scheduler = plugin.getScheduler();
+        pluginVersion = plugin.getDescription().getVersion();
     }
 
-    int[] plV = toReadable(pluginVersion);
-    int[] spV = toReadable(spigotVersion);
-
-    if (plV[0] < spV[0]) {
-      return true;
-    } else if ((plV[1] < spV[1])) {
-      return true;
-    } else {
-      return plV[2] < spV[2];
-    }
-  }
-
-  private int[] toReadable(String version) {
-    if (version.contains("-DEV")) {
-      version = version.split("-DEV")[0];
+    public boolean hasUpdateAvailable() {
+        return updateAvailable;
     }
 
-    return Arrays.stream(version.split("\\.")).mapToInt(Integer::parseInt).toArray();
-  }
-
-  @EventHandler(priority = EventPriority.MONITOR)
-  public void onJoin(PlayerJoinEvent e) {
-    if (e.getPlayer().hasPermission("placeholderapi.updatenotify")) {
-      Msg.msg(e.getPlayer(),
-          "&bAn update for &fPlaceholder&7API &e(&fPlaceholder&7API &fv" + getSpigotVersion()
-              + "&e)"
-          , "&bis available at &ehttps://www.spigotmc.org/resources/placeholderapi." + RESOURCE_ID
-              + "/");
+    public String getModrinthVersion() {
+        return modrinthVersion;
     }
-  }
+
+    public void fetch() {
+        scheduler.runTaskAsynchronously(() -> {
+            try {
+                HttpsURLConnection con = (HttpsURLConnection) new URL(MODRINTH_URL).openConnection();
+                con.setRequestMethod("GET");
+                final JsonElement json = new Gson().fromJson(new BufferedReader(new InputStreamReader(con.getInputStream())), JsonElement.class);
+                modrinthVersion = json.getAsJsonArray().get(0).getAsJsonObject().get("version_number").getAsString();
+            } catch (Exception ex) {
+                plugin.getLogger().info("Failed to check for updates on modrinth.");
+                return;
+            }
+
+            if (modrinthVersion == null || modrinthVersion.isEmpty()) {
+                return;
+            }
+
+            updateAvailable = modrinthIsNewer();
+
+            if (!updateAvailable) {
+                return;
+            }
+
+            scheduler.runTask(() -> {
+                plugin.getLogger()
+                        .info("An update for PlaceholderAPI (v" + getModrinthVersion() + ") is available at:");
+                plugin.getLogger()
+                        .info("https://modrinth.com/plugin/placeholderapi");
+                Bukkit.getPluginManager().registerEvents(this, plugin);
+            });
+        });
+    }
+
+    private boolean modrinthIsNewer() {
+        if (modrinthVersion == null || modrinthVersion.isEmpty()) {
+            return false;
+        }
+
+        int[] plV = toReadable(pluginVersion);
+        int[] spV = toReadable(modrinthVersion);
+
+        if (plV[0] < spV[0]) {
+            return true;
+        } else if ((plV[1] < spV[1])) {
+            return true;
+        } else {
+            return plV[2] < spV[2];
+        }
+    }
+
+    private int[] toReadable(String version) {
+        if (version.contains("-DEV")) {
+            version = version.split("-DEV")[0];
+        }
+
+        return Arrays.stream(version.split("\\.")).mapToInt(Integer::parseInt).toArray();
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onJoin(PlayerJoinEvent e) {
+        if (e.getPlayer().hasPermission("placeholderapi.updatenotify")) {
+            Msg.msg(e.getPlayer(),
+                    "&bAn update for &fPlaceholder&7API &e(&fPlaceholder&7API &fv" + getModrinthVersion()
+                            + "&e)"
+                    , "&bis available at &ehttps://modrinth.com/plugin/placeholderapi");
+        }
+    }
 }

@@ -2,7 +2,7 @@
  * This file is part of PlaceholderAPI
  *
  * PlaceholderAPI
- * Copyright (c) 2015 - 2024 PlaceholderAPI Team
+ * Copyright (c) 2015 - 2026 PlaceholderAPI Team
  *
  * PlaceholderAPI free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@ import static java.util.stream.IntStream.range;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -36,35 +37,35 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class Format {
 
-  private Format() {}
+    private Format() {}
 
-  @NotNull
-  public static Optional<List<String>> tablify(@NotNull final Align align,
-      @NotNull final List<List<String>> rows) {
-    return findSpacing(rows)
-        .map(spacing -> buildFormat(align, spacing))
-        .map(format -> rows.stream()
-            .map(
-                row -> String.format(format, row.toArray()).substring(align == Align.RIGHT ? 2 : 0))
-            .collect(toList()));
-  }
+    @NotNull
+    public static Optional<List<String>> tablify(@NotNull final Align align,
+                                                 @NotNull final List<List<String>> rows) {
+        return findSpacing(rows)
+                .map(spacing -> buildFormat(align, spacing))
+                .map(format -> rows.stream()
+                        .map(
+                                row -> String.format(format, row.toArray()).substring(align == Align.RIGHT ? 2 : 0))
+                        .collect(toList()));
+    }
 
-  @NotNull
-  private static String buildFormat(@NotNull final Align align, final int[] spacing) {
-    return stream(spacing)
-        .mapToObj(space -> "%" + (align == Align.LEFT ? "-" : "") + (space + 2) + "s")
-        .collect(joining());
-  }
+    @NotNull
+    private static String buildFormat(@NotNull final Align align, final int[] spacing) {
+        return stream(spacing)
+                .mapToObj(space -> "%" + (align == Align.LEFT ? "-" : "") + (space + 2) + "s")
+                .collect(joining());
+    }
 
-  @NotNull
-  private static Optional<int[]> findSpacing(@NotNull final List<List<String>> rows) {
-    return rows.stream()
-        .map(row -> row.stream().mapToInt(String::length).toArray())
-        .reduce((l, r) -> range(0, min(l.length, r.length)).map(i -> max(l[i], r[i])).toArray());
-  }
+    @NotNull
+    private static Optional<int[]> findSpacing(@NotNull final List<List<String>> rows) {
+        return rows.stream()
+                .map(row -> row.stream().mapToInt(String::length).toArray())
+                .reduce((l, r) -> range(0, min(l.length, r.length)).map(i -> max(l[i], r[i])).toArray());
+    }
 
-  public enum Align {
-    LEFT, RIGHT
-  }
+    public enum Align {
+        LEFT, RIGHT
+    }
 
 }

@@ -2,7 +2,7 @@
  * This file is part of PlaceholderAPI
  *
  * PlaceholderAPI
- * Copyright (c) 2015 - 2024 PlaceholderAPI Team
+ * Copyright (c) 2015 - 2026 PlaceholderAPI Team
  *
  * PlaceholderAPI free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,24 +23,24 @@ package me.clip.placeholderapi.expansion;
 @Deprecated
 public final class Version {
 
-  private final boolean isSpigot;
-  private final String version;
+    private final boolean isSpigot;
+    private final String version;
 
-  public Version(String version, boolean isSpigot) {
-    this.version = version;
-    this.isSpigot = isSpigot;
-  }
+    public Version(String version, boolean isSpigot) {
+        this.version = version;
+        this.isSpigot = isSpigot;
+    }
 
-  public String getVersion() {
-    return version == null ? "unknown" : version;
-  }
+    public String getVersion() {
+        return version == null ? "unknown" : version;
+    }
 
-  public boolean isSpigot() {
-    return isSpigot;
-  }
+    public boolean isSpigot() {
+        return isSpigot;
+    }
 
-  public boolean compareTo(String version) {
-    return getVersion().equalsIgnoreCase(version);
-  }
+    public boolean compareTo(String version) {
+        return getVersion().equalsIgnoreCase(version);
+    }
 
 }
